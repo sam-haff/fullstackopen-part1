@@ -17,11 +17,11 @@ const FeedbackControlsSection = ({handleGood, handleNeutral, handleBad}) => {
   )
 }
 
-const StatisticLine = ({text, value}) => {
+const StatisticLine = ({text, value, suffix=""}) => {
   return (
     <tr>
       <td>{text}</td>
-      <td>{value}</td>
+      <td>{value}{suffix}</td>
     </tr>
   )
 }
@@ -37,8 +37,8 @@ const Statistics = ({good, neutral, bad}) => {
     )
   }
 
-  const avg = (good - bad)/all
-  const positiveFraction = good/all 
+  const avg = ((good - bad)/all).toFixed(2)
+  const positiveFraction = (100.0*(good/all)).toFixed(2)
 
   return (
     <div>
@@ -49,7 +49,7 @@ const Statistics = ({good, neutral, bad}) => {
         <StatisticLine text="bad" value={bad} />
         <StatisticLine text="all" value={all} />
         <StatisticLine text="average" value={avg} />
-        <StatisticLine text="positive" value={(100.0*positiveFraction).toString() + " %"} />
+        <StatisticLine text="positive" value={positiveFraction} suffix=" %" />
       </table>
     </div>
   )
